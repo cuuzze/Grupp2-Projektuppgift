@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "45906ef2-5d40-4af2-8c9d-08ad2f522846",
+		"name": "PrestaShop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create user & login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const rEmail = pm.environment.get('randomEmail'), rFirst = pm.environment.get('randomFirstName'), rLast = pm.environment.get('randomLastName');\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"create_account\",\r",
+							"    value: \"1\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK\"\r",
+							"})\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"firstname\",\r",
+							"    value: \"{{randomFirstName}}\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"lastname\",\r",
+							"    value: \"{{randomLastName}}\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"email\",\r",
+							"    value: \"{{randomEmail}}\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"password\",\r",
+							"    value: \"12345\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"customer_privacy\",\r",
+							"    value: \"1\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"psgdpr\",\r",
+							"    value: \"1\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"submitCreate\",\r",
+							"    value: \"1\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log out",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.addQueryParams({\r",
+							"    key: \"mylogout\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Auth",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
