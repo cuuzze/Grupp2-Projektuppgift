@@ -17,7 +17,7 @@ pipeline {
     }
     post {
         success {
-            junit allowEmptyResults: true, testResults: "${WORKSPACE}/test-results/*.xm                     
+         junit allowEmptyResults: true, testResults: "${WORKSPACE}/test-results/*.xml"             
         }
     }
 }
