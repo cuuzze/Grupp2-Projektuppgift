@@ -2,7 +2,7 @@ pipeline {
     environment {
             PATH = "C:\\Program Files\\Java\\jdk-17.0.1"
     }
-    agent {   label 'Grupp2JMeter'   }
+    agent {   label 'Grupp2'   }
    
     stages{
         stage('Run Jmeter tests') {
