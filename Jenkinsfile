@@ -7,14 +7,14 @@ pipeline {
     stages{
         stage('Run Jmeter tests') {
             steps {
-                bat "${JMETER_HOME}\\bin\\jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t ${JMETER_HOME}\\bin\\PrestaShopReq1.jmx -l jmeter_report.jtl"
+                 bat 'C:\\tools\\apache-jmeter-5.4.1\\bin\\jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t C:\\tools\\apache-jmeter-5.4.1\\bin\\PrestaShopReq1.jmx -l jmeter_report.jtl'
                 perfReport 'jmeter_report.jtl'
             }
         }
     }
-    post {
+   post {
         success {
-            junit allowEmptyResults: true, testResults: "${WORKSPACE}/test-results/*.xml"                       
+            junit 'target/surefire-reports/**/*.xml'                       
         }
     }
 }
