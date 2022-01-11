@@ -7,7 +7,7 @@ pipeline {
     stages{
         stage('Run Jmeter tests') {
             steps {
-                 bat 'C:\\tools\\apache-jmeter-5.4.1\\bin\\jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t C:\\tools\\apache-jmeter-5.4.1\\bin\\PrestaShopReq1.jmx -l jmeter_report.jtl'
+                 bat '${JMETER_HOME}\\jmeter.bat -Jjmeter.save.saveservice.output_format=xml -n -t ${JMETER_HOME}\\PrestaShopReq1.jmx -l jmeter_report.jtl'
                 perfReport 'jmeter_report.jtl'
             }
         }
