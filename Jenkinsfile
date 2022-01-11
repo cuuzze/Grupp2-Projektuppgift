@@ -1,7 +1,6 @@
 pipeline {
     environment {
-            PATH = "C:\\WINDOWS\\SYSTEM32;C:\\Tools\\Java\\jdk-15.0.2\
-                   "C:\\Program Files\\Java\\jdk-17.0.1\\bin"
+            PATH = "C:\\WINDOWS\\SYSTEM32;C:\\Program Files\\Java\\jdk-17.0.1\\bin"
 
     }
     agent any{ label 'grupp2_jmeter' }
