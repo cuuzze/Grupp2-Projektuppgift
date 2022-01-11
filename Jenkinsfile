@@ -3,7 +3,7 @@ pipeline {
             PATH = "C:\\WINDOWS\\SYSTEM32;C:\\Program Files\\Java\\jdk-17.0.1\\bin"
 
     }
-    agent any{ label 'grupp2_jmeter' }
+    agent { label 'grupp2_jmeter' }
     
     stages{
         stage('Run Jmeter tests') {
