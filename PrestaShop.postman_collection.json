@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "45906ef2-5d40-4af2-8c9d-08ad2f522846",
+		"_postman_id": "94afe522-a9fc-4f36-9838-317e595e7179",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -94,6 +94,106 @@
 					],
 					"path": [
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add to cart",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.addQueryParams({\r",
+							"    key: \"add\",\r",
+							"    value: \"1\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"N3GURVIGKHCY725K9YFEMESRXERVAJY6\"\r",
+							"})\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"qty\",\r",
+							"    value: \"7\"\r",
+							"})\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"id_product\",\r",
+							"    value: \"1\"\r",
+							"})\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"id_product_attribute\",\r",
+							"    value: \"5\"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cart",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete from cart",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.addQueryParams({\r",
+							"    key: \"delete\",\r",
+							"    value: \"1\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"N3GURVIGKHCY725K9YFEMESRXERVAJY6\"\r",
+							"})\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"id_product\",\r",
+							"    value: \"1\"\r",
+							"})\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"id_product_attribute\",\r",
+							"    value: \"5\"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cart",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cart"
 					]
 				}
 			},
