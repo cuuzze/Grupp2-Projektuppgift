@@ -12,7 +12,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"let s = pm.response.text(), \r",
+							"static_token = s.slice(s.indexOf(\"static_token\") +15, s.indexOf(\"token\") +40);\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"autoToken\", static_token)\r",
+							"\r",
+							" "
 						],
 						"type": "text/javascript"
 					}
@@ -66,7 +72,8 @@
 							"pm.request.addQueryParams({\r",
 							"    key: \"submitCreate\",\r",
 							"    value: \"1\"\r",
-							"});"
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -106,6 +113,11 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
+							"pm.request.addQueryParams({\r",
+							"    key: \"token\",\r",
+							"    value: \"autoToken\"\r",
+							"});\r",
+							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"add\",\r",
 							"    value: \"1\"\r",
@@ -160,6 +172,11 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
+							"pm.request.addQueryParams({\r",
+							"    key: \"token\",\r",
+							"    value: \"{{autoToken}}\"\r",
+							"});\r",
+							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"delete\",\r",
 							"    value: \"1\"\r",
