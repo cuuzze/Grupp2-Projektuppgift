@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8fc7ca00-acc0-47f5-9610-dfab4bc76657",
+		"_postman_id": "03f1b866-3376-4f35-8b3d-deb06cf8959f",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,11 +12,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"let s = pm.response.text(), \r",
-							"static_token = s.slice(s.indexOf(\"static_token\") +15, s.indexOf(\"token\") +40);\r",
+							"let respBd = pm.response.text(), \r",
+							"static_token = respBd.slice(respBd.indexOf(\"static_token\") +15, respBd.indexOf(\"token\") +40);\r",
 							"\r",
 							"\r",
-							"pm.environment.set(\"autoToken\", static_token)\r",
+							"pm.environment.set(\"customerToken\", static_token)\r",
 							"\r",
 							" "
 						],
@@ -115,7 +115,7 @@
 						"exec": [
 							"pm.request.addQueryParams({\r",
 							"    key: \"token\",\r",
-							"    value: \"{{autoToken}}\"\r",
+							"    value: \"{{customerToken}}\"\r",
 							"});\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
@@ -150,8 +150,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"let s = pm.response.text(), \r",
-							"token = s.slice(s.indexOf(\"debug\") -35, s.indexOf(\"debug\") -3);\r",
+							"let respBd = pm.response.text(), \r",
+							"token = respBd.slice(respBd.indexOf(\"debug\") -35, respBd.indexOf(\"debug\") -3);\r",
 							"\r",
 							"\r",
 							"pm.environment.set(\"checkOutToken\", token)"
@@ -173,125 +173,6 @@
 					],
 					"path": [
 						"cart"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete from cart",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.request.addQueryParams({\r",
-							"    key: \"token\",\r",
-							"    value: \"{{autoToken}}\"\r",
-							"});\r",
-							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"delete\",\r",
-							"    value: \"1\"\r",
-							"});\r",
-							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"ws_key\",\r",
-							"    value: \"N3GURVIGKHCY725K9YFEMESRXERVAJY6\"\r",
-							"})\r",
-							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"id_product\",\r",
-							"    value: \"1\"\r",
-							"})\r",
-							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"id_product_attribute\",\r",
-							"    value: \"5\"\r",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/cart",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"cart"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Log out",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.request.addQueryParams({\r",
-							"    key: \"mylogout\"\r",
-							"});\r",
-							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"ws_key\",\r",
-							"    value: \"EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK\"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "value",
-							"value": "EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK",
-							"type": "string"
-						},
-						{
-							"key": "key",
-							"value": "Auth",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						""
 					]
 				}
 			},
@@ -411,9 +292,6 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"const rAddress = pm.environment.get('randomAddress'), rCity = pm.environment.get('randomCity');\r",
-							"\r",
-							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"ws_key\",\r",
 							"    value: \"58RITWB56ZMT4NYXFHY7EWD9HWIQV46Q\"\r",
@@ -475,29 +353,13 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"const rAddress = pm.environment.get('randomAddress'), rCity = pm.environment.get('randomCity');\r",
-							"\r",
-							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"ws_key\",\r",
 							"    value: \"58RITWB56ZMT4NYXFHY7EWD9HWIQV46Q\"\r",
 							"});\r",
 							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"select_payment_option\",\r",
-							"    value: \"payment-option-1\"\r",
-							"});\r",
 							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"conditions_to_approve[terms-and-conditions]\",\r",
-							"    value: \"1\"\r",
-							"});\r",
-							"\r",
-							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"payment-confirmation\",\r",
-							"    value: \"submit\"\r",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -525,16 +387,106 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/order",
+					"raw": "{{baseUrl}}/{{paymentValidation}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"order"
+						"{{paymentValidation}}"
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Log out",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.addQueryParams({\r",
+							"    key: \"mylogout\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Auth",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"COLLECTION TEST | check if active environment is correct\", () => {",
+					"        pm.expect(pm.environment.name).to.eql(\"PrestaShop_Environment\");",
+					"});"
+				]
+			}
 		}
 	]
 }
