@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aa5f7f8d-2775-4f59-8f14-74606eb5fd7f",
+		"_postman_id": "644b8bcb-3d73-4223-8dd8-1755acbf066c",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -142,6 +142,19 @@
 							"    key: \"id_product_attribute\",\r",
 							"    value: \"5\"\r",
 							"})"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let s = pm.response.text(), \r",
+							"token = s.slice(s.indexOf(\"static_token\") +15, s.indexOf(\"token\") -50);\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"checkOutToken\", token)"
 						],
 						"type": "text/javascript"
 					}
@@ -291,13 +304,13 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							"const rEmail = pm.environment.get('randomEmail'), rAddress = pm.environment.get('randomAddress'), rCity = pm.environment.get('randomCity');\r",
+							"const rAddress = pm.environment.get('randomAddress'), rCity = pm.environment.get('randomCity');\r",
 							"\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"ws_key\",\r",
-							"    value: \"Y16G7WIHVK8WQDC42F1LL77FX5HBU3MD\"\r",
-							"})\r",
+							"    value: \"58RITWB56ZMT4NYXFHY7EWD9HWIQV46Q\"\r",
+							"});\r",
 							"\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
@@ -327,15 +340,21 @@
 							"});\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
-							"    key: \"submitAddress\",\r",
-							"    value: \"1\",    \r",
-							"\r",
+							"    key: \"token\",\r",
+							"    value: \"{{checkOutToken}}\"\r",
 							"});\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"confirm-addresses\",\r",
 							"    value: \"1\"\r",
-							"})\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"submitAddress\",\r",
+							"    value: \"1\",    \r",
+							"\r",
+							"});\r",
+							"\r",
 							"\r",
 							"\r",
 							"\r",
