@@ -151,7 +151,7 @@
 					"script": {
 						"exec": [
 							"let s = pm.response.text(), \r",
-							"token = s.slice(s.indexOf(\"static_token\") +15, s.indexOf(\"token\") -50);\r",
+							"token = s.slice(s.indexOf(\"debug\") -35, s.indexOf(\"debug\") -3);\r",
 							"\r",
 							"\r",
 							"pm.environment.set(\"checkOutToken\", token)"
