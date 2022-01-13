@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "644b8bcb-3d73-4223-8dd8-1755acbf066c",
+		"_postman_id": "8fc7ca00-acc0-47f5-9610-dfab4bc76657",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -350,6 +350,12 @@
 							"});\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
+							"    key: \"use_same_address\",\r",
+							"    value: \"1\",    \r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
 							"    key: \"submitAddress\",\r",
 							"    value: \"1\",    \r",
 							"\r",
@@ -360,6 +366,138 @@
 							"\r",
 							"\r",
 							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shipping",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const rAddress = pm.environment.get('randomAddress'), rCity = pm.environment.get('randomCity');\r",
+							"\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"58RITWB56ZMT4NYXFHY7EWD9HWIQV46Q\"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"confirmDeliveryOption\",\r",
+							"    value: \"1\"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const rAddress = pm.environment.get('randomAddress'), rCity = pm.environment.get('randomCity');\r",
+							"\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"58RITWB56ZMT4NYXFHY7EWD9HWIQV46Q\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"select_payment_option\",\r",
+							"    value: \"payment-option-1\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"conditions_to_approve[terms-and-conditions]\",\r",
+							"    value: \"1\"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"payment-confirmation\",\r",
+							"    value: \"submit\"\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
