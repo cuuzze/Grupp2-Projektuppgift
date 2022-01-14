@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "03f1b866-3376-4f35-8b3d-deb06cf8959f",
+		"_postman_id": "7a9de2c9-17db-4890-bc38-ee7d8ad565d3",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,7 +18,19 @@
 							"\r",
 							"pm.environment.set(\"customerToken\", static_token)\r",
 							"\r",
-							" "
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"  // we only get 201 using forms\r",
+							"});\r",
+							"\r",
+							"//check the name of the created user\r",
+							"get_name = respBd.slice(respBd.indexOf(\"firstname\") +12, respBd.indexOf(\"email\") -3);\r",
+							"set_user = pm.request.url.query.toObject().firstname\r",
+							"pm.test(\"Check the user's name\", function (){\r",
+							"pm.expect(get_name).to.eql(set_user)\r",
+							"});\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -43,6 +55,8 @@
 							"    key: \"firstname\",\r",
 							"    value: \"{{randomFirstName}}\"\r",
 							"});\r",
+							"\r",
+							"\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"lastname\",\r",
@@ -316,6 +330,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"// check that we get sent to the 4th step\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
 							""
 						],
 						"type": "text/javascript"
