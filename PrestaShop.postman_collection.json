@@ -12,13 +12,21 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"let respBd = pm.response.text(), \r",
+							"const respBd = pm.response.text(), \r",
 							"static_token = respBd.slice(respBd.indexOf(\"static_token\") +15, respBd.indexOf(\"token\") +40);\r",
-							"\r",
 							"\r",
 							"pm.environment.set(\"customerToken\", static_token)\r",
 							"\r",
-							" "
+							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"\r",
+							" //check the name of the created user is the same as the one generated through postman\r",
+							"get_name = respBd.slice(respBd.indexOf(\"firstname\") +12, respBd.indexOf(\"email\") -3);\r",
+							"set_user = pm.request.url.query.toObject().firstname\r",
+							"pm.test(\"Check the user's name\", function (){\r",
+							"pm.expect(get_name).to.eql(set_user)\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -150,11 +158,15 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"let respBd = pm.response.text(), \r",
-							"token = respBd.slice(respBd.indexOf(\"debug\") -35, respBd.indexOf(\"debug\") -3);\r",
+							"const respBd = pm.response.text(), \r",
+							"ctoken = respBd.slice(respBd.indexOf(\"debug\") -35, respBd.indexOf(\"debug\") -3);\r",
 							"\r",
 							"\r",
-							"pm.environment.set(\"checkOutToken\", token)"
+							"pm.environment.set(\"checkOutToken\", ctoken);\r",
+							"\r",
+							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -255,7 +267,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -316,7 +330,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -358,7 +374,6 @@
 							"    value: \"58RITWB56ZMT4NYXFHY7EWD9HWIQV46Q\"\r",
 							"});\r",
 							"\r",
-							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -368,7 +383,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -405,7 +422,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
