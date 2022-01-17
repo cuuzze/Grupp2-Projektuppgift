@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6ff2f165-5a74-4618-8ff9-c7974ce3a211",
+		"_postman_id": "d45095fd-7f05-4792-892c-6d9914e7390f",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -234,7 +234,7 @@
 							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"qty\",\r",
-							"    value: \"7\"\r",
+							"    value: \"1\"\r",
 							"})\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
@@ -262,7 +262,18 @@
 							"\r",
 							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
-							"});"
+							"});\r",
+							"\r",
+							"get_quantity = respBd.slice(respBd.indexOf(\"cart_quantity\") +16, respBd.indexOf(\"cart_quantity\") +17);\r",
+							"pm.test(\"Check the cart quantity is = 1\", function (){\r",
+							"    pm.expect(get_quantity).to.eql(\"1\")\r",
+							"});\r",
+							"\r",
+							"get_quantity = respBd.slice(respBd.indexOf(\"id_feature_value\") -4, respBd.indexOf(\"id_feature_value\") -3);\r",
+							"pm.test(\"Check the product id = 5\", function (){\r",
+							"    pm.expect(get_quantity).to.eql(\"5\")\r",
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -438,8 +449,21 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"const respBd = pm.response.text()\r",
+							"\r",
 							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"\r",
+							"get_quantity = respBd.slice(respBd.indexOf(\"ecotax\") +28, respBd.indexOf(\"ecotax\") +34);\r",
+							"pm.test(\"Check that the total value of the item is $29\", function (){\r",
+							"    pm.expect(get_quantity).to.eql(\"$29.00\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"get_quantity2 = respBd.slice(respBd.indexOf(\"subtotals\") -11, respBd.indexOf(\"subtotals\") -5);\r",
+							"pm.test(\"Check that it that the item costs $36 after tax\", function (){\r",
+							"    pm.expect(get_quantity2).to.eql(\"$36.00\")\r",
 							"});"
 						],
 						"type": "text/javascript"
