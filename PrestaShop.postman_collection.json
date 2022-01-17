@@ -1,10 +1,89 @@
 {
 	"info": {
-		"_postman_id": "03f1b866-3376-4f35-8b3d-deb06cf8959f",
+		"_postman_id": "c75fade3-d192-4580-aff1-3bda2aa3f8fd",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Log out",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"\r",
+							"const respBd = pm.response.text()\r",
+							"\r",
+							"get_name = respBd.slice(respBd.indexOf(\"firstname\") +11, respBd.indexOf(\"email\") -2);\r",
+							"pm.test(\"Check that firstname is null\", function (){\r",
+							"pm.expect(get_name).to.eql(\"null\")\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.request.addQueryParams({\r",
+							"    key: \"mylogout\"\r",
+							"});\r",
+							"\r",
+							"pm.request.addQueryParams({\r",
+							"    key: \"ws_key\",\r",
+							"    value: \"EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Auth",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Create user & login",
 			"event": [
@@ -26,7 +105,16 @@
 							"set_user = pm.request.url.query.toObject().firstname\r",
 							"pm.test(\"Check the user's name\", function (){\r",
 							"pm.expect(get_name).to.eql(set_user)\r",
-							"});"
+							"});\r",
+							"\r",
+							"get_email = respBd.slice(respBd.indexOf(\"email\") +8, respBd.indexOf(\"birthday\") -3);\r",
+							"set_email = pm.request.url.query.toObject().email\r",
+							"pm.test(\"Check the user's email\", function (){\r",
+							"pm.expect(get_email).to.eql(set_email)\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -385,7 +473,10 @@
 						"exec": [
 							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
-							"});"
+							"});\r",
+							"\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -410,76 +501,6 @@
 					],
 					"path": [
 						"{{paymentValidation}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Log out",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.request.addQueryParams({\r",
-							"    key: \"mylogout\"\r",
-							"});\r",
-							"\r",
-							"pm.request.addQueryParams({\r",
-							"    key: \"ws_key\",\r",
-							"    value: \"EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK\"\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "apikey",
-					"apikey": [
-						{
-							"key": "value",
-							"value": "EMLX2FKDSD1C7V6UDXVBMEWBCAK7U6WK",
-							"type": "string"
-						},
-						{
-							"key": "key",
-							"value": "Auth",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						""
 					]
 				}
 			},
