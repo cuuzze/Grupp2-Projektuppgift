@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c75fade3-d192-4580-aff1-3bda2aa3f8fd",
+		"_postman_id": "3103757e-958a-42e4-9a46-1de498f34a34",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -21,6 +21,11 @@
 							"get_name = respBd.slice(respBd.indexOf(\"firstname\") +11, respBd.indexOf(\"email\") -2);\r",
 							"pm.test(\"Check that firstname is null\", function (){\r",
 							"pm.expect(get_name).to.eql(\"null\")\r",
+							"});\r",
+							"\r",
+							"get_logged = respBd.slice(respBd.indexOf(\"is_logged\") +11, respBd.indexOf(\"gender\") -2);\r",
+							"pm.test(\"Check that the user is not logged in\", function (){\r",
+							"pm.expect(get_logged).to.eql(\"false\")\r",
 							"});\r",
 							"\r",
 							""
@@ -113,7 +118,10 @@
 							"pm.expect(get_email).to.eql(set_email)\r",
 							"});\r",
 							"\r",
-							"\r",
+							"get_logged = respBd.slice(respBd.indexOf(\"is_logged\") +11, respBd.indexOf(\"gender\") -2);\r",
+							"pm.test(\"Check that the user is logged in\", function (){\r",
+							"pm.expect(get_logged).to.eql(\"true\")\r",
+							"});\r",
 							""
 						],
 						"type": "text/javascript"
@@ -522,8 +530,17 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
+					"const respBd = pm.response.text();",
+					"",
 					"pm.test(\"COLLECTION TEST | check if active environment is correct\", () => {",
 					"        pm.expect(pm.environment.name).to.eql(\"PrestaShop_Environment\");",
+					"});",
+					"",
+					"pm.test(\"COLLECTION TEST | check if there is an active, error free body\", () => {",
+					"    pm.response.to.be.ok;",
+					"    pm.response.to.be.withBody;",
+					"    pm.response.to.not.be.error;",
+					"    pm.expect(respBd).to.contain('text');",
 					"});"
 				]
 			}
