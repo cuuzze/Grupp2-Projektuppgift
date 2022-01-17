@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3103757e-958a-42e4-9a46-1de498f34a34",
+		"_postman_id": "6ff2f165-5a74-4618-8ff9-c7974ce3a211",
 		"name": "PrestaShop",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -239,12 +239,12 @@
 							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"id_product\",\r",
-							"    value: \"1\"\r",
+							"    value: \"5\"\r",
 							"})\r",
 							"\r",
 							"pm.request.addQueryParams({\r",
 							"    key: \"id_product_attribute\",\r",
-							"    value: \"5\"\r",
+							"    value: \"0\"\r",
 							"})"
 						],
 						"type": "text/javascript"
@@ -365,6 +365,18 @@
 						"exec": [
 							"pm.test(\"Successful POST request: status code 200 or 201\", () => {\r",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"\r",
+							"const respBd = pm.response.text()\r",
+							"\r",
+							"get_country = respBd.slice(respBd.indexOf(\"country\") +25, respBd.indexOf(\"country\") +38);\r",
+							"pm.test(\"Check that the country is United States\", function (){\r",
+							"pm.expect(get_country).to.eql(\"United States\")\r",
+							"});\r",
+							"\r",
+							"get_state = respBd.slice(respBd.indexOf(\"id_state\") +11, respBd.indexOf(\"id_state\") +12);\r",
+							"pm.test(\"Check that the state id is 8\", function (){\r",
+							"pm.expect(get_state).to.eql(\"8\")\r",
 							"});"
 						],
 						"type": "text/javascript"
